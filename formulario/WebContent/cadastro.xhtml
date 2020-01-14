@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Cadastro" action="cadastro.jsf" />
+			<p:menuitem value="Pesquisar" action="pesquisar.jsf"/>
+		</p:breadCrumb>
+	</h:form>
+	
+	<br/>
+		
+	<h:form id="formulario">
+	
+		<p:outputLabel style="font-size: 40px; font-family:DejaVu Sans Mono, monospace; font-weight: 900; background-color:LightGray;" value="CADASTRO DE USUÁRIOS"> </p:outputLabel>
+		
+		<p:messages autoUpdate="true" showDetail="true" showSummary="false"/>
+		<h4>* : campos obrigatórios</h4>
+		
+		<br/>
+		
+		<p:panelGrid columns="2" >
+			<p:outputLabel>Id:</p:outputLabel>
+			<p:inputText  value="#{usuarioBean.user.id}" readonly="true"/>
+
+			<p:outputLabel>Nome:*</p:outputLabel>
+			<p:inputText value="#{usuarioBean.user.nome}" required="true" requiredMessage="Informe o nome!"/>
+			
+			<p:outputLabel>Sexo:*</p:outputLabel>
+			<p:selectOneMenu value="#{usuarioBean.user.sexo}">
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
+				<f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel>Data de Nascimento:*</p:outputLabel>
+			<p:inputMask value="#{usuarioBean.user.nascimento}" mask="99/99/9999">
+			</p:inputMask>
+									
+			<p:outputLabel>Email:*</p:outputLabel>
+			<p:inputText value="#{usuarioBean.user.email}" required="true" requiredMessage="Informe um email!"/>
+			
+			<p:outputLabel>Login:*</p:outputLabel>
+			<p:inputText value="#{usuarioBean.user.login}" required="true" requiredMessage="Informe um login!"/>
+
+			<p:outputLabel>Senha:*</p:outputLabel>
+			<p:password value="#{usuarioBean.user.senha}" required="true" requiredMessage="Informe uma senha!"/>
+
+		</p:panelGrid>
+
+		<br/>
+		<br/>
+		
+		<p:commandButton value="Salvar" ajax="false" action="#{usuarioBean.salvar}" id="botaosalvar">
+			<f:ajax execute="botaosalvar" render=":formTabela" />
+		</p:commandButton>
+		<p:commandButton value="Novo" immediate="true" action="#{usuarioBean.novo}" >
+			<f:ajax execute="@this" render=":formulario"/>
+		</p:commandButton>
+		
+		<br/>
+		<br/>
+		
+	</h:form>
+
+	<h:form id="formTabela">
+		<p:dataTable value="#{usuarioBean.listaUser}" var="user">
+			<p:column headerText="Id">
+				<h:outputText value="#{user.id}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{user.nome}" />
+			</p:column>
+
+			<p:column headerText="Sexo">
+				<h:outputText value="#{user.sexo}" />
+			</p:column>
+			
+			<p:column headerText="Data de Nascimento">
+				<h:outputText value="#{user.nascimento}"/>
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{user.email}" />
+			</p:column>
+
+			<p:column headerText="Login">
+				<h:outputText value="#{user.login}" />
+			</p:column>
+
+			<p:column headerText="Editar">
+				<h:commandLink id="linkEditar">
+					<f:setPropertyActionListener value="#{user}" target="#{usuarioBean.user}" />
+					<f:ajax execute="linkEditar" render=":formulario" />
+					<h:graphicImage url="resources/img/editar.png" height="22" width="22" />
+				</h:commandLink>
+			</p:column>
+
+			<p:column headerText="Remover">
+				<h:commandLink action="#{usuarioBean.remover}" id="linkRemover">
+					<f:setPropertyActionListener value="#{user}" target="#{usuarioBean.user}"></f:setPropertyActionListener>
+					<f:ajax execute="linkRemover" render="@form" />
+					<h:graphicImage url="resources/img/excluir.png" height="22" width="22" />
+				</h:commandLink>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+
+
+
+
+</html>

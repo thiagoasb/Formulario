@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Cadastro" action="cadastro.jsf" />
+			<p:menuitem value="Pesquisar" action="pesquisar.jsf"/>
+		</p:breadCrumb>
+	</h:form>
+	
+	<br/>
+		
+	<h:form id="formulario" style="margin-left:35%">
+	
+		<p:outputLabel style="font-size: 40px; font-family:DejaVu Sans Mono, monospace; font-weight: 900; background-color:LightGray;" value="PESQUISAR USUÁRIO"> </p:outputLabel>
+		
+		<br/>
+		<br/>
+		<br/>
+		
+		<p:panelGrid columns="2" >
+			<p:outputLabel >Pesquisar:</p:outputLabel>
+			<p:inputText value="#{usuarioBean.parametro}" placeholder="Digite um nome..."/>
+
+		</p:panelGrid>
+		
+		<br/>
+		
+		<p:commandButton value="Pesquisar" ajax="false" action="#{usuarioBean.buscarListarNome}" id="botaoPesquisar" style="margin-left:15%">
+			<f:ajax execute="botaoPesquisar" render=":formTabela" />
+		</p:commandButton>
+		<br/>
+		<br/>
+		
+	</h:form>
+
+	<h:form id="formTabela">
+		<p:dataTable value="#{usuarioBean.listaPesquisado}" var="user">
+			<p:column headerText="Id">
+				<h:outputText value="#{user.id}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{user.nome}" />
+			</p:column>
+
+			<p:column headerText="Sexo">
+				<h:outputText value="#{user.sexo}" />
+			</p:column>
+			
+			<p:column headerText="Data de Nascimento">
+				<h:outputText value="#{user.nascimento}"/>
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{user.email}" />
+			</p:column>
+
+			<p:column headerText="Login">
+				<h:outputText value="#{user.login}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+
+
+
+
+</html>
