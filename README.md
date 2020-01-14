@@ -14,7 +14,7 @@ Instruções para rodar o projeto:
 - Nas *Properties* do projeto, adicionar ao *Project Facets* o *Dynamic Web Module, Java, JavaScript, JavaServer Faces* e o *JPA*;
 - Ainda nas *Properties*, verificar nas *Deployment Assembly*, se as *Maven Dependencies* estão adicionadas;
 - Criar um novo *Database*, onde ficará armazenado os dados (no projeto foi criado um banco com o nome "formulario");
-- Configurar o hibernate no arquivo *persistence.xml*.
+- Configurar o hibernate no arquivo *persistence.xml* (verificar url, username, password e nome do banco).
 - Adicionar projeto no servidor.
 
 **VISUALIZAÇÃO DAS TELAS:**
